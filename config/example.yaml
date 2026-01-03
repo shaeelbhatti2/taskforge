@@ -1,0 +1,7 @@
+http_addr: ":8080"
+database_url: "postgres://taskforge:taskforge@localhost:5432/taskforge?sslmode=disable"
+log_level: "info"
+scheduler_tick: "1s"
+worker_heartbeat: "10s"
+job_log_limit: 65536
+leader_lock_id: 424242
