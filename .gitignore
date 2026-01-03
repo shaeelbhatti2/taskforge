@@ -1,0 +1,10 @@
+bin/
+*.exe
+*.test
+*.out
+.env
+coverage.out
+taskforge
+taskforge-worker
+web/dist/
+.DS_Store
