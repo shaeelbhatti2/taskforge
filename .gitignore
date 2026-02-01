@@ -4,7 +4,7 @@ bin/
 *.out
 .env
 coverage.out
-taskforge
-taskforge-worker
+/taskforge
+/taskforge-worker
 web/dist/
 .DS_Store
