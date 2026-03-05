@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TaskForge Runs</title>
+  <link rel="stylesheet" href="/ui/style.css">
+</head>
+<body>
+  <header><h1>Run Logs</h1></header>
+  <main>
+    <label>Run ID <input id="runId" type="text"></label>
+    <button onclick="loadRun()">Load</button>
+    <pre id="stdout"></pre>
+    <pre id="stderr" class="err"></pre>
+  </main>
+  <script src="/ui/app.js"></script>
+</body>
+</html>
