@@ -1,0 +1,39 @@
+name: nightly-cleanup
+timeout_sec: 600
+fail_fast: true
+nodes:
+  - id: fetch
+    type: job
+    job_id: fetch-artifacts
+    label: Fetch artifacts
+  - id: fork
+    type: fork
+    label: Parallel cleanup
+  - id: clean-a
+    type: job
+    job_id: cleanup-cache-a
+    label: Clean cache A
+  - id: clean-b
+    type: job
+    job_id: cleanup-cache-b
+    label: Clean cache B
+  - id: join
+    type: join
+    label: Join
+  - id: notify
+    type: job
+    job_id: notify-complete
+    label: Notify
+edges:
+  - from: fetch
+    to: fork
+  - from: fork
+    to: clean-a
+  - from: fork
+    to: clean-b
+  - from: clean-a
+    to: join
+  - from: clean-b
+    to: join
+  - from: join
+    to: notify
