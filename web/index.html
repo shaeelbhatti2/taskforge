@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskForge Dashboard</title>
+  <link rel="stylesheet" href="/ui/style.css">
+</head>
+<body>
+  <header>
+    <h1>TaskForge</h1>
+    <nav>
+      <a href="/ui/index.html">Dashboard</a>
+      <a href="/ui/runs.html">Runs</a>
+      <a href="/ui/dlq.html">DLQ</a>
+    </nav>
+  </header>
+  <main>
+    <section class="cards">
+      <div class="card" id="running">Running: -</div>
+      <div class="card" id="queued">Queued: -</div>
+      <div class="card" id="failed">Failed: -</div>
+      <div class="card" id="success">Success: -</div>
+    </section>
+    <section>
+      <h2>Workers</h2>
+      <pre id="workers">loading...</pre>
+    </section>
+  </main>
+  <script src="/ui/app.js"></script>
+  <script>
+    loadDashboard();
+    setInterval(loadDashboard, 5000);
+  </script>
+</body>
+</html>
