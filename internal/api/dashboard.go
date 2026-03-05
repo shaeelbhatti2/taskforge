@@ -3,6 +3,7 @@ package api
 import (
 	"net/http"
 
+	"github.com/go-chi/chi/v5"
 	"github.com/shaeelbhatti2/taskforge/internal/domain"
 	"github.com/shaeelbhatti2/taskforge/internal/store"
 )

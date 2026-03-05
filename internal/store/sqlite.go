@@ -49,7 +49,7 @@ func (s *sqliteStore) ReleaseLeader(ctx context.Context, lockID int64, holder st
 }
 
 func (s *sqliteStore) Migrate(ctx context.Context) error {
-	return runMigrations(ctx, s.db)
+	return runMigrations(ctx, s.db, true)
 }
 
 func (s *sqliteStore) Ping(ctx context.Context) error {
