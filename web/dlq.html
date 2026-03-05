@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TaskForge DLQ</title>
+  <link rel="stylesheet" href="/ui/style.css">
+</head>
+<body>
+  <header><h1>Dead Letter Queue</h1></header>
+  <main>
+    <table id="dlq">
+      <thead><tr><th>ID</th><th>Job</th><th>Reason</th><th>Created</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </main>
+  <script src="/ui/app.js"></script>
+  <script>loadDLQ();</script>
+</body>
+</html>
