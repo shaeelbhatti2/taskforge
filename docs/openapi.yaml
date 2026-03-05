@@ -1,0 +1,135 @@
+openapi: 3.0.3
+info:
+  title: TaskForge API
+  version: 1.0.0
+  description: Distributed job scheduler and workflow engine
+servers:
+  - url: http://localhost:8080/api/v1
+security:
+  - ApiKeyAuth: []
+paths:
+  /namespaces:
+    get:
+      summary: List namespaces
+      responses:
+        "200":
+          description: OK
+    post:
+      summary: Create namespace
+      responses:
+        "201":
+          description: Created
+  /jobs:
+    get:
+      summary: List jobs
+      responses:
+        "200":
+          description: OK
+    post:
+      summary: Create job
+      responses:
+        "201":
+          description: Created
+  /jobs/{id}:
+    get:
+      summary: Get job
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+  /jobs/{id}/trigger:
+    post:
+      summary: Trigger manual run
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "202":
+          description: Accepted
+  /schedules:
+    get:
+      summary: List schedules
+      responses:
+        "200":
+          description: OK
+    post:
+      summary: Create schedule
+      responses:
+        "201":
+          description: Created
+  /workflows:
+    get:
+      summary: List workflows
+      responses:
+        "200":
+          description: OK
+    post:
+      summary: Create workflow
+      responses:
+        "201":
+          description: Created
+  /workflows/validate:
+    post:
+      summary: Validate workflow DAG
+      responses:
+        "200":
+          description: Valid
+  /runs:
+    get:
+      summary: List runs
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+        - name: job_id
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+  /runs/{id}/cancel:
+    post:
+      summary: Cancel run
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Cancelled
+  /dlq:
+    get:
+      summary: List dead letter entries
+      responses:
+        "200":
+          description: OK
+  /workers:
+    get:
+      summary: List workers
+      responses:
+        "200":
+          description: OK
+  /dashboard:
+    get:
+      summary: Dashboard stats
+      responses:
+        "200":
+          description: OK
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
