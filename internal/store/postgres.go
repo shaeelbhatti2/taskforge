@@ -33,7 +33,7 @@ func (s *pgStore) Close() error {
 }
 
 func (s *pgStore) Migrate(ctx context.Context) error {
-	return runMigrations(ctx, s.db)
+	return runMigrations(ctx, s.db, false)
 }
 
 func (s *pgStore) CreateNamespace(ctx context.Context, ns *domain.Namespace) error {
@@ -541,4 +541,26 @@ func nullStr(v string) sql.NullString {
 		return sql.NullString{}
 	}
 	return sql.NullString{String: v, Valid: true}
+}
+
+type scanner interface {
+	Scan(dest ...any) error
+}
+
+func scanJob(row scanner) (*domain.JobDefinition, error) {
+	var job domain.JobDefinition
+	var headers, env sql.NullString
+	err := row.Scan(
+		&job.ID, &job.NamespaceID, &job.Name, &job.Type, &job.Command,
+		&job.HTTPMethod, &job.HTTPURL, &headers, &job.HTTPBody, &job.ExpectedStatus,
+		&job.TimeoutSec, &job.RetryPolicyID, &job.ConcurrencyGroupID,
+		&job.ConcurrencyLimit, &job.RateLimitPerMin, &job.IdempotencyKey, &env,
+		&job.CreatedAt, &job.UpdatedAt,
+	)
+	if err != nil {
+		return nil, err
+	}
+	decodeJSON(headers.String, &job.HTTPHeaders)
+	decodeJSON(env.String, &job.Env)
+	return &job, nil
 }
